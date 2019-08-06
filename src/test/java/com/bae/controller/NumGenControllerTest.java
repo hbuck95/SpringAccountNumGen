@@ -25,9 +25,8 @@ public class NumGenControllerTest {
 	@Mock
 	private NumGenController controller;
 
-	private static final int LENGTH = 10;
-
 	private static List<Character> VALID_CHARS;
+	private static List<Integer> VALID_LENGTHS;
 
 	@BeforeClass
 	public static void setup() {
@@ -35,6 +34,11 @@ public class NumGenControllerTest {
 		VALID_CHARS.add('A');
 		VALID_CHARS.add('B');
 		VALID_CHARS.add('C');
+
+		VALID_LENGTHS = new ArrayList<>();
+		VALID_LENGTHS.add(6);
+		VALID_LENGTHS.add(8);
+		VALID_LENGTHS.add(10);
 	}
 
 	@Test
@@ -42,7 +46,7 @@ public class NumGenControllerTest {
 		Mockito.when(controller.generateAccountNumber()).thenReturn(RandomStringUtils.randomNumeric(10));
 		String num = controller.generateAccountNumber();
 		Mockito.verify(controller).generateAccountNumber();
-		assertEquals(LENGTH, num.length());
+		assertEquals(VALID_LENGTHS.contains(num.length()), true);
 	}
 
 }
